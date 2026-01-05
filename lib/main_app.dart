@@ -28,6 +28,24 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.amber[900],
+        title: Text("Cashflow App", style: TextStyle(color: Colors.white)),
+        centerTitle: false,
+        leading: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Icon(
+            Icons.monetization_on,
+            size: 30,
+            color: Colors.amber[100],
+          ),
+        ),
+        actions: [
+          Icon(Icons.notifications, size: 30, color: Colors.amber[100]),
+          Icon(Icons.send, size: 30, color: Colors.amber[100]),
+          SizedBox(width: 10),
+        ],
+      ),
       backgroundColor: Colors.amber[700],
       body: SafeArea(child: pages[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(

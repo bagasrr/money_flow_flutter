@@ -84,7 +84,7 @@ class ListPage extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.amber[200],
+              color: Colors.amber[100],
             ),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(

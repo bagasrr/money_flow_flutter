@@ -22,7 +22,7 @@ class TransactionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      color: Colors.amber[50],
+      color: Colors.amber[100],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15), // Sudut tumpul
       ),
