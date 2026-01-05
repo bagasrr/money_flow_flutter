@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionCard extends StatelessWidget {
   final int index;
   final String transactionTitle;
   final int transactionAmount;
-  final String transactionDate;
+  final DateTime transactionDate;
   final String transactionCategory;
 
   const TransactionCard({
@@ -82,7 +83,7 @@ class TransactionCard extends StatelessWidget {
 
             // 3. BAGIAN TANGGAL (KANAN)
             Text(
-              transactionDate,
+              DateFormat.yMMMd().format(transactionDate),
               style: TextStyle(color: Colors.grey[600], fontSize: 12),
             ),
           ],

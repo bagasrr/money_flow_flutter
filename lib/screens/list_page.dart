@@ -5,48 +5,93 @@ import '/widgets/transaction_card.dart';
 class ListPage extends StatelessWidget {
   ListPage({super.key});
 
+  // final List<Map<String, dynamic>> transactionData = [
+  //   {
+  //     "transactionTitle": "Buy Laptop",
+  //     "amount": 2000000,
+  //     "category": "Expense",
+  //     "transactionDate": "01/01/2026",
+  //   },
+  //   {
+  //     "transactionTitle": "Sell Phone",
+  //     "amount": 1500000,
+  //     "category": "Expense",
+  //     "transactionDate": "01/01/2026",
+  //   },
+  //   {
+  //     "transactionTitle": "Freelance Project",
+  //     "amount": 5000000,
+  //     "category": "Income",
+  //     "transactionDate": "01/01/2026",
+  //   },
+  //   {
+  //     "transactionTitle": "Grocery Shopping",
+  //     "amount": 500000,
+  //     "category": "Expense",
+  //     "transactionDate": "01/01/2026",
+  //   },
+  //   {
+  //     "transactionTitle": "Movie Ticket",
+  //     "amount": 200000,
+  //     "category": "Income",
+  //     "transactionDate": "01/01/2026",
+  //   },
+  //   {
+  //     "transactionTitle": "Gas Station",
+  //     "amount": 10000,
+  //     "category": "Expense",
+  //     "transactionDate": "01/01/2026",
+  //   },
+  //   {
+  //     "transactionTitle": "Grocery Shopping",
+  //     "amount": 500000,
+  //     "category": "Expense",
+  //     "transactionDate": "01/01/2026",
+  //   },
+  // ];
+
   final List<Map<String, dynamic>> transactionData = [
     {
       "transactionTitle": "Buy Laptop",
       "amount": 2000000,
       "category": "Expense",
-      "transactionDate": "01/01/2026",
+      "transactionDate": DateTime(2025, 12, 19),
     },
     {
       "transactionTitle": "Sell Phone",
       "amount": 1500000,
       "category": "Expense",
-      "transactionDate": "01/01/2026",
+      "transactionDate": DateTime(2026, 1, 1),
     },
     {
       "transactionTitle": "Freelance Project",
       "amount": 5000000,
       "category": "Income",
-      "transactionDate": "01/01/2026",
+      "transactionDate": DateTime(2026, 1, 3),
     },
     {
       "transactionTitle": "Grocery Shopping",
       "amount": 500000,
       "category": "Expense",
-      "transactionDate": "01/01/2026",
+      "transactionDate": DateTime(2026, 1, 5),
     },
     {
       "transactionTitle": "Movie Ticket",
       "amount": 200000,
       "category": "Income",
-      "transactionDate": "01/01/2026",
+      "transactionDate": DateTime(2026, 1, 2),
     },
     {
       "transactionTitle": "Gas Station",
       "amount": 10000,
       "category": "Expense",
-      "transactionDate": "01/01/2026",
+      "transactionDate": DateTime(2026, 1, 3),
     },
     {
       "transactionTitle": "Grocery Shopping",
       "amount": 500000,
       "category": "Expense",
-      "transactionDate": "01/01/2026",
+      "transactionDate": DateTime(2026, 1, 1),
     },
   ];
 
