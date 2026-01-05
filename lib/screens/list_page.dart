@@ -1,54 +1,10 @@
+import 'package:flut_app/utils/currency_format.dart';
 import 'package:flutter/material.dart';
 import '/widgets/money_flow_view.dart';
 import '/widgets/transaction_card.dart';
 
 class ListPage extends StatelessWidget {
   ListPage({super.key});
-
-  // final List<Map<String, dynamic>> transactionData = [
-  //   {
-  //     "transactionTitle": "Buy Laptop",
-  //     "amount": 2000000,
-  //     "category": "Expense",
-  //     "transactionDate": "01/01/2026",
-  //   },
-  //   {
-  //     "transactionTitle": "Sell Phone",
-  //     "amount": 1500000,
-  //     "category": "Expense",
-  //     "transactionDate": "01/01/2026",
-  //   },
-  //   {
-  //     "transactionTitle": "Freelance Project",
-  //     "amount": 5000000,
-  //     "category": "Income",
-  //     "transactionDate": "01/01/2026",
-  //   },
-  //   {
-  //     "transactionTitle": "Grocery Shopping",
-  //     "amount": 500000,
-  //     "category": "Expense",
-  //     "transactionDate": "01/01/2026",
-  //   },
-  //   {
-  //     "transactionTitle": "Movie Ticket",
-  //     "amount": 200000,
-  //     "category": "Income",
-  //     "transactionDate": "01/01/2026",
-  //   },
-  //   {
-  //     "transactionTitle": "Gas Station",
-  //     "amount": 10000,
-  //     "category": "Expense",
-  //     "transactionDate": "01/01/2026",
-  //   },
-  //   {
-  //     "transactionTitle": "Grocery Shopping",
-  //     "amount": 500000,
-  //     "category": "Expense",
-  //     "transactionDate": "01/01/2026",
-  //   },
-  // ];
 
   final List<Map<String, dynamic>> transactionData = [
     {
@@ -95,13 +51,6 @@ class ListPage extends StatelessWidget {
     },
   ];
 
-  String getFormattedCurrency(int amount) {
-    return amount.toString().replaceAllMapped(
-      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-      (Match m) => '${m[1]}.',
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     int totalIncome = transactionData
@@ -122,7 +71,7 @@ class ListPage extends StatelessWidget {
             children: [
               Text("Your Balanced"),
               Text(
-                "Rp ${getFormattedCurrency(totalBalance)}",
+                CurrencyFormat.convertToIdr(totalBalance, 0),
                 style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -141,26 +90,14 @@ class ListPage extends StatelessWidget {
             child: Column(
               children: [
                 // CARA PANGGILNYA SEKARANG BENAR:
-                MoneyFlowView(
-                  category: "Income",
-                  amount: getFormattedCurrency(totalIncome),
-                  categoryColor: Colors.green,
-                ),
+                MoneyFlowView(category: "Income", amount: totalIncome),
                 const SizedBox(height: 10), // Memberi jarak sedikit
                 // Kita bisa memakainya lagi dengan data berbeda (Reusable)
-                MoneyFlowView(
-                  category: "Expense",
-                  amount: getFormattedCurrency(totalExpense),
-                  categoryColor: Colors.red, // Contoh pakai warna merah
-                ),
+                MoneyFlowView(category: "Expense", amount: totalExpense),
 
                 const Divider(height: 20, thickness: 1, color: Colors.black),
 
-                MoneyFlowView(
-                  category: "Total",
-                  amount: getFormattedCurrency(totalBalance),
-                  categoryColor: Colors.blueGrey,
-                ),
+                MoneyFlowView(category: "Total", amount: totalBalance),
               ],
             ),
           ),

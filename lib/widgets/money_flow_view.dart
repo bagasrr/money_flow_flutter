@@ -1,19 +1,14 @@
+import 'package:flut_app/utils/currency_format.dart';
 import 'package:flutter/material.dart';
 
 class MoneyFlowView extends StatelessWidget {
   final String category;
-  final String amount;
-
-  // 1. Tambahkan variabel warna. Tanda tanya (?) artinya boleh null (kosong)
-  final Color? categoryColor;
+  final int amount;
 
   const MoneyFlowView({
     super.key,
     required this.category,
     required this.amount,
-    // 2. Tambahkan di constructor.
-    // Tidak pakai 'required' supaya opsional.
-    this.categoryColor,
   });
 
   @override
@@ -23,18 +18,24 @@ class MoneyFlowView extends StatelessWidget {
       children: [
         Text(
           category,
-          // 3. Masukkan warna ke dalam TextStyle
           style: TextStyle(
-            // Tanda '??' artinya: Jika categoryColor null, pakai Colors.black
-            color: categoryColor ?? Colors.black,
+            color: category == "Income"
+                ? Colors.green
+                : category == "Expense"
+                ? Colors.red
+                : Colors.black,
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          amount,
+          CurrencyFormat.convertToIdr(amount, 0),
           style: TextStyle(
-            color: categoryColor ?? Colors.black,
+            color: category == "Income"
+                ? Colors.green
+                : category == "Expense"
+                ? Colors.red
+                : Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),

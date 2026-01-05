@@ -1,3 +1,4 @@
+import 'package:flut_app/utils/currency_format.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -16,14 +17,6 @@ class TransactionCard extends StatelessWidget {
     required this.transactionDate,
     required this.transactionCategory,
   });
-
-  // Fungsi helper untuk bikin format angka ada titiknya (contoh: 20.000.000)
-  String getFormattedCurrency(int amount) {
-    return amount.toString().replaceAllMapped(
-      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-      (Match m) => '${m[1]}.',
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,39 +42,33 @@ class TransactionCard extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(width: 15), // Jarak antara Icon dan Text
-            // 2. BAGIAN TEXT TENGAH (MENGGUNAKAN EXPANDED)
-            // Expanded ini yang bikin dia rapi dan mendorong tanggal ke kanan
+            const SizedBox(width: 15),
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Rata Kiri
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    // Logika format text: Tanda +/- lalu panggil fungsi format angka
-                    "${transactionCategory == "Income" ? "+" : "-"} Rp${getFormattedCurrency(transactionAmount)}",
+                    "${transactionCategory == "Income" ? "+" : "-"} ${CurrencyFormat.convertToIdr(transactionAmount, 0)}",
                     style: TextStyle(
                       color: transactionCategory == "Income"
                           ? Colors.green
                           : Colors.red,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      overflow: TextOverflow
-                          .ellipsis, // Kalau kepanjangan jadi ... (titik tiga)
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const SizedBox(height: 4), // Jarak dikit
+                  const SizedBox(height: 4),
                   Text(
                     transactionTitle,
                     style: const TextStyle(fontSize: 13, color: Colors.black87),
                     maxLines: 1,
-                    overflow:
-                        TextOverflow.ellipsis, // Kalau kepanjangan jadi ...
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
 
-            // 3. BAGIAN TANGGAL (KANAN)
             Text(
               DateFormat.yMMMd().format(transactionDate),
               style: TextStyle(color: Colors.grey[600], fontSize: 12),
