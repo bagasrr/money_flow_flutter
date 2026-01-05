@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import '/widgets/graph_time_filter.dart';
-import '/widgets/transaction_list.dart';
+import 'graph_time_filter.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeWidget extends StatefulWidget {
+  const HomeWidget({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeWidget> createState() => _HomeWidgetState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -51,7 +50,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(height: 20),
-
           // Recent Activities
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
@@ -77,7 +75,23 @@ class _HomePageState extends State<HomePage> {
                   child: ListView.builder(
                     itemCount: 5,
                     itemBuilder: (context, index) {
-                      return TransactionList(index: index);
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.amber[700],
+                          child: Icon(
+                            Icons.monetization_on,
+                            color: Colors.white,
+                          ),
+                        ),
+                        title: Text(
+                          "Rp ${((index + 1) * 1000000).toString()}",
+                          style: TextStyle(
+                            color: index % 2 == 0 ? Colors.green : Colors.red,
+                          ),
+                        ),
+                        subtitle: Text("Title Of Transaction ${index + 1}"),
+                        trailing: Text("01/01/2026"),
+                      );
                     },
                   ),
                 ),
