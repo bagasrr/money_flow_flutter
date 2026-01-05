@@ -18,7 +18,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  List<Widget> pages = const [
+  List<Widget> pages = [
     HomePage(),
     ListPage(),
     Center(child: Text("Add New Page")),
@@ -35,30 +35,30 @@ class _MainAppState extends State<MainApp> {
         backgroundColor: Colors.amber[200],
         selectedItemColor: Colors.amber[900],
         iconSize: 40,
-        showSelectedLabels: false,
+        showSelectedLabels: true,
         showUnselectedLabels: false,
         currentIndex: _selectedIndex,
         onTap: _ontap,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
-            label: 'Home',
+            label: '_____',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list_outlined),
-            label: 'List',
+            label: '_____',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_circle_outlined),
-            label: 'Add New',
+            label: '_____',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart_outlined),
-            label: 'Statistik',
+            label: '_____',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings_outlined),
-            label: 'Settings',
+            label: '_____',
           ),
         ],
       ),

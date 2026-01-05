@@ -1,12 +1,73 @@
 import 'package:flutter/material.dart';
 import '/widgets/money_flow_view.dart';
-import '/widgets/transaction_list.dart';
+import '/widgets/transaction_card.dart';
 
 class ListPage extends StatelessWidget {
-  const ListPage({super.key});
+  ListPage({super.key});
+
+  final List<Map<String, dynamic>> transactionData = [
+    {
+      "transactionTitle": "Buy Laptop",
+      "amount": 2000000,
+      "category": "Expense",
+      "transactionDate": "01/01/2026",
+    },
+    {
+      "transactionTitle": "Sell Phone",
+      "amount": 1500000,
+      "category": "Expense",
+      "transactionDate": "01/01/2026",
+    },
+    {
+      "transactionTitle": "Freelance Project",
+      "amount": 5000000,
+      "category": "Income",
+      "transactionDate": "01/01/2026",
+    },
+    {
+      "transactionTitle": "Grocery Shopping",
+      "amount": 500000,
+      "category": "Expense",
+      "transactionDate": "01/01/2026",
+    },
+    {
+      "transactionTitle": "Movie Ticket",
+      "amount": 200000,
+      "category": "Income",
+      "transactionDate": "01/01/2026",
+    },
+    {
+      "transactionTitle": "Gas Station",
+      "amount": 10000,
+      "category": "Expense",
+      "transactionDate": "01/01/2026",
+    },
+    {
+      "transactionTitle": "Grocery Shopping",
+      "amount": 500000,
+      "category": "Expense",
+      "transactionDate": "01/01/2026",
+    },
+  ];
+
+  String getFormattedCurrency(int amount) {
+    return amount.toString().replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (Match m) => '${m[1]}.',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    int totalIncome = transactionData
+        .where((item) => item['category'] == 'Income')
+        .fold(0, (sum, item) => sum + (item['amount'] as int));
+
+    int totalExpense = transactionData
+        .where((item) => item['category'] == 'Expense')
+        .fold(0, (sum, item) => sum + (item['amount'] as int));
+
+    int totalBalance = totalIncome - totalExpense;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -16,8 +77,11 @@ class ListPage extends StatelessWidget {
             children: [
               Text("Your Balanced"),
               Text(
-                "Rp 100.000.000",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                "Rp ${getFormattedCurrency(totalBalance)}",
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -32,24 +96,25 @@ class ListPage extends StatelessWidget {
             child: Column(
               children: [
                 // CARA PANGGILNYA SEKARANG BENAR:
-                const MoneyFlowView(
+                MoneyFlowView(
                   category: "Income",
-                  amount: "Rp 50.000.000",
+                  amount: getFormattedCurrency(totalIncome),
                   categoryColor: Colors.green,
                 ),
                 const SizedBox(height: 10), // Memberi jarak sedikit
                 // Kita bisa memakainya lagi dengan data berbeda (Reusable)
-                const MoneyFlowView(
+                MoneyFlowView(
                   category: "Expense",
-                  amount: "Rp 20.000.000",
+                  amount: getFormattedCurrency(totalExpense),
                   categoryColor: Colors.red, // Contoh pakai warna merah
                 ),
 
                 const Divider(height: 20, thickness: 1, color: Colors.black),
 
-                const MoneyFlowView(
+                MoneyFlowView(
                   category: "Total",
-                  amount: "Rp 100.000.000",
+                  amount: getFormattedCurrency(totalBalance),
+                  categoryColor: Colors.blueGrey,
                 ),
               ],
             ),
@@ -64,13 +129,17 @@ class ListPage extends StatelessWidget {
                 color: Colors.amber[200],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: ListView.separated(
-                itemCount: 10,
-                separatorBuilder: (context, index) =>
-                    Divider(color: Colors.amber[700], thickness: 1),
-                itemBuilder: (context, index) {
-                  return TransactionList(index: index);
-                },
+              child: ListView(
+                children: transactionData.map((transaction) {
+                  int index = transactionData.indexOf(transaction);
+                  return TransactionCard(
+                    index: index,
+                    transactionTitle: transaction["transactionTitle"],
+                    transactionAmount: transaction["amount"],
+                    transactionDate: transaction["transactionDate"],
+                    transactionCategory: transaction["category"],
+                  );
+                }).toList(),
               ),
             ),
           ),
