@@ -1,3 +1,4 @@
+import 'package:flut_app/screens/add_transaction_page.dart';
 import 'package:flutter/material.dart';
 import '/screens/list_page.dart';
 import 'screens/home_page.dart';
@@ -21,7 +22,7 @@ class _MainAppState extends State<MainApp> {
   List<Widget> pages = [
     HomePage(),
     ListPage(),
-    Center(child: Text("Add New Page")),
+    AddTransactionPage(),
     Center(child: Text("Statistik Page")),
     Center(child: Text("Settings Page")),
   ];
@@ -29,7 +30,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber[900],
+        backgroundColor: Colors.amber[700],
         title: Text("Cashflow App", style: TextStyle(color: Colors.white)),
         centerTitle: false,
         leading: Padding(
