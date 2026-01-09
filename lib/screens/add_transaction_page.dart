@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddTransactionPage extends StatefulWidget {
   const AddTransactionPage({super.key});
@@ -10,10 +11,18 @@ class AddTransactionPage extends StatefulWidget {
 class _AddTransactionPageState extends State<AddTransactionPage> {
   String categoryValue = "Income";
   String categoryChildValue = "Salary";
+  // DateTime selectedDate = DateTime.now();
+
+  TextEditingController dateController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    // Set default tanggal hari ini pas aplikasi dibuka
+    dateController.text = DateFormat('dd MMMM yyyy').format(DateTime.now());
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -92,9 +101,12 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                       ),
 
                       TextField(
-                        autofocus: true,
+                        autofocus: false,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 2,
                         decoration: InputDecoration(
                           labelText: "Description",
+                          alignLabelWithHint: true,
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.amber[800]!),
                           ),
@@ -110,8 +122,36 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                       SizedBox(height: 10),
                       TextField(
                         readOnly: true,
+                        controller: dateController,
                         // Lanjut buat masukkin input form buat tangga; ya
-                        decoration: InputDecoration(labelText: "Tanggal"),
+                        decoration: InputDecoration(
+                          labelText: "Date",
+                          hintText: "Select Date",
+                          prefixIcon: Icon(Icons.calendar_today),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.amber[800]!),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.amber[900]!),
+                          ),
+                        ),
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2101),
+                          );
+
+                          if (pickedDate != null) {
+                            String formattedDate = DateFormat(
+                              'dd MMMM yyyy',
+                            ).format(pickedDate);
+                            setState(() {
+                              dateController.text = formattedDate;
+                            });
+                          }
+                        },
                       ),
                     ],
                   ),
