@@ -48,6 +48,7 @@ class _MainAppState extends State<MainApp> {
         ],
       ),
       backgroundColor: Colors.amber[700],
+
       body: SafeArea(child: pages[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

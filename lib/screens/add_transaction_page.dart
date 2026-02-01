@@ -175,7 +175,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                         ),
                       ),
                       onPressed: () {
-                        // Logic to add transaction
+                        Navigator.pop(context); //nti ubah lagi ya
                       },
                       child: Text(
                         "Cancel",
@@ -197,7 +197,30 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                         backgroundColor: Colors.blue,
                       ),
                       onPressed: () {
-                        // Logic to add transaction
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text(
+                                "Apakah ingin menyimpan transaksi ini?",
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Tidak"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Ya"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       child: Text(
                         "Save",
